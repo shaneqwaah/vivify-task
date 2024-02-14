@@ -30,6 +30,36 @@ class TaskList extends Component
         $this->tasks = Task::all(); // Refresh the task list
     }
 
+    public function editTask($taskId)
+    {
+        $this->editTaskId = $taskId;
+    }
+
+    public function cancelEdit()
+    {
+        $this->editTaskId = null;
+    }
+
+
+    public function updateTask()
+    {
+        $task = Task::findOrFail($this->editTaskId);
+        $task->update([
+            'title' => $this->title,
+            'description' => $this->description ?? null,
+            'status' => $this->status
+        ]);
+
+        $this->resetForm();
+        $this->tasks = Task::all(); // Refresh the task list
+    }
+
+    public function deleteTask($taskId)
+    {
+        Task::destroy($taskId);
+        $this->tasks = Task::all();
+    }
+
 
     public function resetForm()
     {
