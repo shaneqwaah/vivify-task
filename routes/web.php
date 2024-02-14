@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\CreateTask;
+use App\Livewire\TaskList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/tasks', TaskList::class)->name('tasks.index');
+Route::get('/tasks/create', CreateTask::class)->name('tasks.create');
