@@ -25,7 +25,7 @@
     <!-- Edit Task Form -->
     @if($editTaskId)
         <form wire:submit.prevent="updateTask" class="mb-4">
-            <input type="text" wire:model="title" placeholder="Title" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
+            <input type="text" wire:model="title"  placeholder="Title" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
             <input type="text" wire:model="description" placeholder="Description" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
             <select wire:model="status" class="px-3 py-2 border border-gray-300 bg-white mb-2">
                 <option value="">Select</option>

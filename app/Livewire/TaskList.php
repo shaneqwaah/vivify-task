@@ -8,10 +8,12 @@ use Illuminate\Validation\Rule;
 
 class TaskList extends Component
 {
+    public $task;
     public $tasks;
     public $title;
     public $description;
     public $status;
+    public $editTitle;
     public $editTaskId;
 
     protected $rules = [
@@ -43,11 +45,15 @@ class TaskList extends Component
     public function editTask($taskId)
     {
         $this->editTaskId = $taskId;
+        $task = Task::findOrFail($taskId);
+        $this->editTitle = $task->title;
+        $this->title = $task->title;
+        $this->description = $task->description;
+        $this->status = $task->status;
     }
-
     public function cancelEdit()
     {
-        $this->editTaskId = null;
+        $this->resetForm();
     }
 
     public function updateTask()
@@ -85,13 +91,13 @@ class TaskList extends Component
         $this->tasks = Task::all(); // Refresh the task list
     }
 
-
     public function resetForm()
     {
         $this->title = '';
         $this->description = '';
         $this->status = '';
         $this->editTaskId = null;
+        $this->editTitle = null;
     }
 
     public function render()
