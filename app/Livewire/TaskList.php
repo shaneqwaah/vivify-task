@@ -60,6 +60,19 @@ class TaskList extends Component
         $this->tasks = Task::all();
     }
 
+    public function updateTaskStatus($taskId)
+    {
+        $task = Task::findOrFail($taskId);
+
+        // Update status to "Done" if it's "To Do" or "In Progress"
+        if ($task->status == 'To Do' || $task->status == 'In Progress') {
+            $task->status = 'Done';
+            $task->save();
+        }
+
+        $this->tasks = Task::all(); // Refresh the task list
+    }
+
 
     public function resetForm()
     {

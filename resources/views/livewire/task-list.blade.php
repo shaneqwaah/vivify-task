@@ -38,6 +38,11 @@
                     <h2 class="text-lg font-bold">{{ $task->title }}</h2>
                     <div class="flex items-center space-x-2">
 
+                        @if (in_array($task->status, ['To Do', 'In Progress']))
+                            <!-- Mark as Complete Checkbox Icon -->
+                            <input type="checkbox" wire:click="updateTaskStatus({{ $task->id }})" class="text-green-500 form-checkbox focus:outline-none">
+                        @endif
+
                         <!-- Edit Task Button -->
                         <button wire:click="editTask({{ $task->id }})" class="text-blue-500 hover:text-blue-700 focus:outline-none">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
