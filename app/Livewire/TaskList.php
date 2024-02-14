@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Task;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 
 class TaskList extends Component
 {
@@ -13,6 +14,12 @@ class TaskList extends Component
     public $status;
     public $editTaskId;
 
+    protected $rules = [
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'status' => 'required|string'
+    ];
+
     public function mount()
     {
         $this->tasks = Task::all();
@@ -20,6 +27,8 @@ class TaskList extends Component
 
     public function createTask()
     {
+        $this->validate();
+
         Task::create([
             'title' => $this->title,
             'description' => $this->description ?? null,
@@ -40,9 +49,10 @@ class TaskList extends Component
         $this->editTaskId = null;
     }
 
-
     public function updateTask()
     {
+        $this->validate();
+
         $task = Task::findOrFail($this->editTaskId);
         $task->update([
             'title' => $this->title,
