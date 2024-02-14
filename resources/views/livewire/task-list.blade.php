@@ -1,13 +1,20 @@
 <!-- livewire/task-list.blade.php -->
 
 <div>
+    <!-- Display success message if any -->
+    @if (session('success'))
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <h2 class="text-lg font-semibold mb-4">Task List</h2>
 
     <!-- Add Task Form -->
     <form wire:submit.prevent="createTask" class="mb-4">
-        <input type="text" wire:model="title" placeholder="Title" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
+        <input type="text" wire:model="title" placeholder="Title" class="rounded-md p-2 border border-gray-300 bg-white mb-2" required>
         <input type="text" wire:model="description" placeholder="Description" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
-        <select wire:model="status" class="px-3 py-2 border border-gray-300 bg-white mb-2">
+        <select wire:model="status" class="px-3 py-2 border border-gray-300 bg-white mb-2" required>
+            <option value="">Select</option>
             <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>
@@ -21,6 +28,7 @@
             <input type="text" wire:model="title" placeholder="Title" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
             <input type="text" wire:model="description" placeholder="Description" class="rounded-md p-2 border border-gray-300 bg-white mb-2">
             <select wire:model="status" class="px-3 py-2 border border-gray-300 bg-white mb-2">
+                <option value="">Select</option>
                 <option value="To Do">To Do</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Done">Done</option>

@@ -37,6 +37,7 @@ class TaskList extends Component
 
         $this->resetForm();
         $this->tasks = Task::all(); // Refresh the task list
+        session()->flash('success', 'Task created successfully!');
     }
 
     public function editTask($taskId)
@@ -62,6 +63,7 @@ class TaskList extends Component
 
         $this->resetForm();
         $this->tasks = Task::all(); // Refresh the task list
+        session()->flash('success', 'Task updated successfully!');
     }
 
     public function deleteTask($taskId)
